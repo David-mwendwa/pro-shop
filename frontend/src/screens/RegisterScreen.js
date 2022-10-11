@@ -38,6 +38,7 @@ const RegisterScreen = () => {
     dispatch(register(name, email, password));
   };
 
+  // TODO: make sure incase of an error, it displays on frontend
   return (
     <FormContainer>
       <h1>Sign Up</h1>
