@@ -98,7 +98,7 @@ const ProfileScreen = () => {
               }></Form.Control>
           </Form.Group>
 
-          <Button type='submit' variant='primary'>
+          <Button className='mt-2' type='submit' variant='primary'>
             Update
           </Button>
         </Form>
@@ -121,7 +121,7 @@ const ProfileScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
+              {orders?.map((order) => (
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(1, 10)}</td>
