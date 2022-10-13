@@ -28,8 +28,6 @@ const UserEditScreen = () => {
   } = userUpdate;
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const redirect = location.search ? location.search.split('=')[1] : '/';
 
   useEffect(() => {
     if (successUpdate) {
