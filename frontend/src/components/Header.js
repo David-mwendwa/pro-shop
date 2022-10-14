@@ -24,7 +24,12 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Routes>
-              <Route path='/' element={<SearchBox />} />
+              <Route path='/'>
+                <Route path='/page/:pageNumber' element={<SearchBox />} />
+                <Route path='/search/:keyword' element={<SearchBox />} />
+                <Route path='' element={<SearchBox />} />
+                <Route path='/admin/productlist/*' element={<SearchBox />} />
+              </Route>
             </Routes>
 
             <Nav className='ml-auto'>

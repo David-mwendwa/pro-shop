@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
+import APIFeatures from '../utils/apiFeatures.js';
 
 /**
  * @desc    Fetch all product
@@ -7,11 +8,19 @@ import Product from '../models/productModel.js';
  * @access  Public
  */
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 2;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? { name: { $regex: req.query.keyword, $options: 'i' } }
     : {};
-  const products = await Product.find({ ...keyword });
-  res.status(200).json(products);
+  // const features = new APIFeatures(Product.find(keyword), req.query);
+  // const doc = await features.query;
+  // res.status(200).json(doc);
+  const count = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.status(200).json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 /**
